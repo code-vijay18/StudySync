@@ -14,7 +14,7 @@ git clone https://github.com/code-vijay18/StudySync.git
 
 --> Move into the directory where we have the project files : 
 ```bash
-cd StudyBud
+cd StudySync
 
 ```
 
