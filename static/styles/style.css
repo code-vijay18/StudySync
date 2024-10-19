@@ -1,39 +1,38 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap");
 
 :root {
-  --color-main: #71c6dd;
-  --color-main-light: #e1f6fb;
-  --color-dark: #3f4156;
-  --color-dark-medium: #51546e;
-  --color-dark-light: #696d97;
-  --color-light: #e5e5e5;
-  --color-gray: #8b8b8b;
-  --color-light-gray: #b2bdbd;
-  --color-bg: #2d2d39;
-  --color-success: #5dd693;
-  --color-error: #fc4b0b;
+  --color-primary: #4a90e2;
+  --color-primary-light: #6aa9f4;
+  --color-secondary: #50c878;
+  --color-accent: #ff6b6b;
+  --color-background: #f4f7f9;
+  --color-foreground: #ffffff;
+  --color-text: #333333;
+  --color-text-light: #666666;
+  --color-border: #e1e4e8;
+  --color-success: #28a745;
+  --color-error: #dc3545;
 }
 
 /*========== base styles ==========*/
 
 * {
-  font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
     "Helvetica Neue", sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   text-rendering: optimizeLegibility;
-  /* color: inherit; */
   font-size: inherit;
 }
 
 html {
-  font-size: 56.25%;
+  font-size: 62.5%;
 }
 
 @media only screen and (min-width: 1200px) {
   html {
-    font-size: 62.5%;
+    font-size: 65%;
   }
 }
 
@@ -47,19 +46,24 @@ body {
   line-height: 1.6;
   font-weight: 400;
   font-size: 1.5rem;
-  color: var(--color-light-gray);
-  background-color: var(--color-bg);
+  color: var(--color-text);
+  background-color: var(--color-background);
   min-height: 100vh;
 }
 
 img {
-  width: 100%;
+  max-width: 100%;
+  height: auto;
 }
 
 a {
-  display: inline-block;
-  color: var(--color-main);
+  color: var(--color-primary);
   text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--color-primary-light);
 }
 
 /*========== components ==========*/
@@ -70,23 +74,25 @@ a {
 }
 
 .btn {
-  background-color: transparent;
-  border: none;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 1rem;
-  cursor: pointer;
-  transition: all ease-in-out 0.3s;
   padding: 1rem 2rem;
-  border-radius: 5px;
-  box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.15);
+  border-radius: 0.5rem;
   font-weight: 500;
+  font-size: 1.4rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .btn--link {
-  border-radius: 0;
+  background-color: transparent;
   padding: 0;
-  color: var(--color-main);
+  color: var(--color-primary);
   box-shadow: none;
 }
 
@@ -95,47 +101,56 @@ a {
 }
 
 .btn--main {
-  background-color: var(--color-main);
-  color: var(--color-dark);
+  background-color: var(--color-primary);
+  color: var(--color-foreground);
+}
+
+.btn--dark {
+  background-color: var(--color-text);
+  color: var(--color-foreground);
 }
 
 .btn:hover {
   opacity: 0.9;
-}
-
-.btn--dark {
-  background-color: var(--color-dark-light);
-  color: var(--color-light);
+  transform: translateY(-2px);
 }
 
 .btn > svg {
-  fill: currentColor;
   width: 1.6rem;
   height: 1.6rem;
 }
 
 .btn--pill {
-  border-radius: 10rem;
+  border-radius: 50px;
   font-size: 1.4rem;
-  font-weight: 700;
-  padding: 6px 2.5rem;
-  color: var(--color-main);
-  background: transparent;
-  border: 2px solid var(--color-main);
+  font-weight: 600;
+  padding: 0.8rem 2.5rem;
+  color: var(--color-primary);
+  background-color: var(--color-foreground);
+  border: 2px solid var(--color-primary);
+}
+
+.btn--pill:hover {
+  color: var(--color-foreground);
+  background-color: var(--color-primary);
 }
 
 .action-button {
   background: transparent;
   border: none;
-  outline: none;
   cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.action-button:hover {
+  opacity: 0.8;
 }
 
 .avatar {
   position: relative;
   display: inline-block;
   border-radius: 50%;
-  border: 2px solid var(--color-main);
+  border: 2px solid var(--color-primary);
 }
 
 .avatar img {
@@ -149,10 +164,11 @@ a {
   content: "";
   display: block;
   position: absolute;
-  background-color: var(--color-gray);
-  z-index: 111;
+  background-color: var(--color-text-light);
   border-radius: 50%;
-  border: 0.3rem solid var(--color-dark);
+  border: 0.3rem solid var(--color-foreground);
+  bottom: 0;
+  right: 0;
 }
 
 .avatar.active::after {
@@ -160,64 +176,54 @@ a {
 }
 
 .avatar.avatar--small img {
-  width: 2.8rem;
-  height: 2.8rem;
+  width: 3rem;
+  height: 3rem;
 }
 
-.avatar.avatar--small:after {
-  width: 0.7rem;
-  height: 0.7rem;
-  bottom: 0px;
-  right: -6px;
+.avatar.avatar--small::after {
+  width: 0.8rem;
+  height: 0.8rem;
 }
 
 .avatar.avatar--medium img {
-  width: 3.6rem;
-  height: 3.6rem;
-  border-radius: 50%;
+  width: 4rem;
+  height: 4rem;
 }
 
-.avatar.avatar--medium:after {
-  width: 0.7rem;
-  height: 0.7rem;
-  bottom: 0px;
-  right: -6px;
+.avatar.avatar--medium::after {
+  width: 1rem;
+  height: 1rem;
 }
 
 .avatar.avatar--large img {
-  display: block;
   width: 8rem;
   height: 8rem;
-  border-radius: 50%;
 }
 
-.avatar.avatar--large:after {
-  width: 1rem;
-  height: 1rem;
-  bottom: 2px;
-  right: 3.5px;
+.avatar.avatar--large::after {
+  width: 1.6rem;
+  height: 1.6rem;
 }
 
 .scroll::-webkit-scrollbar {
   width: 0.6rem;
-  background-color: rgb(41, 41, 46);
 }
 
 .scroll::-webkit-scrollbar-thumb {
+  background-color: var(--color-text-light);
   border-radius: 1rem;
-  background-color: var(--color-gray);
 }
 
 .dropdown-menu {
-  z-index: 111;
   position: absolute;
   top: 5rem;
   right: 0.5rem;
-  background: var(--color-dark-light);
-  border-radius: 5px;
-  box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.15);
+  background: var(--color-foreground);
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   display: none;
+  z-index: 100;
 }
 
 .dropdown-menu.show {
@@ -225,23 +231,20 @@ a {
 }
 
 .dropdown-menu a {
-  padding: 1.2rem 4rem;
+  padding: 1.2rem 2rem;
   display: block;
-  color: var(--color-light) !important;
+  color: var(--color-text);
   font-weight: 500;
   font-size: 1.4rem;
+  transition: background-color 0.3s ease;
 }
 
 .dropdown-menu a:hover {
-  background-color: var(--color-dark-medium);
+  background-color: var(--color-background);
 }
 
 .dropdown-menu > a:not(:last-child) {
-  border-bottom: 1px solid var(--color-dark-medium);
-}
-
-.dropdown-menu a svg {
-  fill: var(--color-light);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .mobile-menu {
@@ -267,7 +270,8 @@ a {
 
 .header {
   padding: 1.5rem;
-  background-color: var(--color-dark);
+  background-color: var(--color-foreground);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 .header > .container {
@@ -284,17 +288,17 @@ a {
 
 .header__logo > img {
   height: 3.2rem;
-  width: 3.2rem;
+  width: auto;
 }
 
 .header__logo > h1 {
   font-weight: 700;
   font-size: 2rem;
-  color: var(--color-light);
+  color: var(--color-text);
 }
 
 .header__search > label {
-  background-color: var(--color-dark-medium);
+  background-color: var(--color-background);
   padding: 1.3rem 1rem;
   display: flex;
   align-items: center;
@@ -303,7 +307,7 @@ a {
 }
 
 .header__search svg {
-  fill: var(--color-gray);
+  fill: var(--color-text-light);
   width: 2rem;
   height: 2rem;
   margin-left: 1rem;
@@ -314,7 +318,7 @@ a {
   background: transparent;
   border: none;
   outline: none;
-  color: var(--color-light);
+  color: var(--color-text);
 }
 
 @media screen and (max-width: 800px) {
@@ -350,7 +354,7 @@ a {
   align-items: center;
   font-weight: 500;
   text-decoration: none;
-  color: var(--color-gray);
+  color: var(--color-text);
 }
 
 .header__menu img {
@@ -362,7 +366,7 @@ a {
 }
 
 .header__menu span {
-  color: var(--color-main);
+  color: var(--color-primary);
   font-weight: 500;
   font-size: 1.4rem;
   display: block;
@@ -371,7 +375,7 @@ a {
 .header__menu svg {
   width: 1.6rem;
   height: 1.6rem;
-  fill: var(--color-dark-light);
+  fill: var(--color-text-light);
 }
 
 .dropdown-button {
@@ -382,7 +386,7 @@ a {
 }
 
 .dropdown-button:hover svg {
-  fill: var(--color-main);
+  fill: var(--color-primary);
 }
 
 /*==============================
@@ -419,6 +423,7 @@ a {
 .layout--2 > .container > div:last-child {
   flex-basis: 25%;
 }
+
 /*========== Layout Box ==========*/
 
 .layout__box {
@@ -429,16 +434,16 @@ a {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -46%);
-  background-color: var(--color-dark);
+  background-color: var(--color-foreground);
   border-radius: 1rem;
-  box-shadow: 1px 1px 6px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
 
 .layout__boxHeader {
   display: flex;
   padding: 1.5rem;
-  background-color: var(--color-dark-light);
+  background-color: var(--color-background);
 }
 
 .layout__boxTitle {
@@ -450,13 +455,13 @@ a {
 .layout__boxTitle h3 {
   text-transform: uppercase;
   font-weight: 500;
-  color: var(--color-light);
+  color: var(--color-text);
 }
 
 .layout__boxTitle svg {
   width: 1.6rem;
   height: 1.6rem;
-  fill: var(--color-main);
+  fill: var(--color-primary);
 }
 
 .layout__body {
@@ -492,40 +497,43 @@ a {
   display: block;
   font-size: 1.5rem;
   margin-bottom: 1rem;
+  color: var(--color-text);
 }
 
 .form__group input,
 .form__group textarea,
 .form__group select {
-  background: transparent;
-  border: 1px solid var(--color-dark-light);
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
   padding: 1rem;
   border-radius: 3px;
   width: 100%;
-  color: var(--color-light);
+  color: var(--color-text);
   font-weight: 500;
   outline: none;
+  transition: all 0.3s ease;
 }
 
 .form__group input:focus,
-.form__group textarea:focus {
-  border-color: var(--color-main);
+.form__group textarea:focus,
+.form__group select:focus {
+  border-color: var(--color-primary);
 }
 
 .form__group textarea {
-  background: transparent;
+  background: var(--color-background);
   height: 10rem;
   resize: none;
 }
 
 .form__group select {
-  color: var(--color-gray);
+  color: var(--color-text-light);
   font-weight: 400;
 }
 
 .form__group select option {
-  background-color: var(--color-dark-light);
-  color: var(--color-light);
+  background-color: var(--color-foreground);
+  color: var(--color-text);
   padding: 0 10rem;
 }
 
@@ -544,7 +552,7 @@ a {
   text-align: center;
   font-size: 1.8rem;
   font-weight: 500;
-  color: var(--color-main);
+  color: var(--color-primary);
   cursor: pointer;
 }
 
@@ -563,7 +571,7 @@ a {
 .topics__header h2 {
   text-transform: uppercase;
   font-weight: 500;
-  color: var(--color-dark-light);
+  color: var(--color-text);
 }
 
 .topics__list {
@@ -575,18 +583,18 @@ a {
   justify-content: space-between;
   margin-bottom: 3rem;
   font-weight: 500;
-  color: var(--color-light-gray);
+  color: var(--color-text-light);
   transition: all 0.3s ease-in-out;
 }
 
 .topics__list li a.active,
 .topics__list li a:hover {
-  color: var(--color-main);
+  color: var(--color-primary);
 }
 
 .topics__list li a span {
   padding: 0.5rem 1rem;
-  background-color: var(--color-dark);
+  background-color: var(--color-background);
   border-radius: 3px;
   font-size: 1.3rem;
   font-weight: 700;
@@ -601,7 +609,7 @@ a {
   margin: 2rem 0;
   padding-bottom: 1rem;
   text-decoration: none;
-  border-bottom: 1px solid var(--color-dark-medium);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .topics-page .header__search{
@@ -629,22 +637,28 @@ a {
 .roomList__header h2 {
   text-transform: uppercase;
   font-weight: 500;
-  color: var(--color-light);
+  color: var(--color-text);
   letter-spacing: 1px;
 }
 
 .roomList__header p {
   font-weight: 500;
-  color: var(--color-dark-light);
+  color: var(--color-text-light);
 }
 
 /*========== Room List Room ==========*/
 
 .roomListRoom {
   margin-bottom: 2.4rem;
-  background-color: var(--color-dark);
+  background-color: var(--color-foreground);
   border-radius: 1rem;
   padding: 2rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.roomListRoom:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
 }
 
 .roomListRoom__header {
@@ -673,8 +687,7 @@ a {
 }
 
 .roomListRoom__actions svg {
-  fill: var(--color-main);
-
+  fill: var(--color-primary);
   width: 1.6rem;
   height: 1.6rem;
 }
@@ -687,16 +700,16 @@ a {
   font-size: 2rem;
   font-weight: 500;
   margin-bottom: 1.5rem;
-  color: var(--color-light);
+  color: var(--color-text);
   transition: all 0.3s ease-in-out;
 }
 
 .roomListRoom__content a:hover {
-  color: var(--color-main);
+  color: var(--color-primary);
 }
 
 .roomListRoom__meta {
-  border-top: 1px solid var(--color-dark-medium);
+  border-top: 1px solid var(--color-border);
   padding-top: 1rem;
   display: flex;
   align-items: center;
@@ -704,7 +717,7 @@ a {
 }
 
 .roomListRoom__joined {
-  color: var(--color-light-gray);
+  color: var(--color-text-light);
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -713,17 +726,18 @@ a {
 }
 
 .roomListRoom__joined svg {
-  fill: var(--color-main);
+  fill: var(--color-primary);
   width: 1.6rem;
   height: 1.6rem;
 }
 
 .roomListRoom__topic {
   padding: 5px 1.5rem;
-  background-color: var(--color-dark-medium);
+  background-color: var(--color-background);
   border-radius: 5rem;
   font-weight: 500;
   font-size: 1.3rem;
+  color: var(--color-text-light);
 }
 
 /*==============================
@@ -731,17 +745,17 @@ a {
 ================================*/
 
 .activities {
-  background: var(--color-dark);
+  background: var(--color-foreground);
   border-radius: 5px;
   overflow: hidden;
 }
 
 .activities__header h2 {
-  background-color: var(--color-dark-light);
+  background-color: var(--color-background);
   text-transform: uppercase;
   font-weight: 500;
   padding: 1rem 1.5rem;
-  color: var(--color-light);
+  color: var(--color-text);
   letter-spacing: 1px;
   font-size: 1.4rem;
 }
@@ -749,7 +763,7 @@ a {
 .activities__box {
   margin: 1.5rem;
   padding: 1.5rem;
-  border: 2px solid var(--color-dark-medium);
+  border: 2px solid var(--color-background);
   border-radius: 5px;
 }
 
@@ -759,7 +773,7 @@ a {
 }
 
 .activities__boxHeader p span {
-  color: var(--color-gray);
+  color: var(--color-text-light);
   font-size: 1.2rem;
   display: block;
 }
@@ -777,7 +791,7 @@ a {
 }
 
 .activities__boxRoomContent {
-  background: var(--color-bg);
+  background: var(--color-background);
   padding: 1rem;
   border-radius: 5px;
   margin-top: 1rem;
@@ -785,7 +799,7 @@ a {
 }
 
 .roomListRoom__actions svg {
-  fill: var(--color-light-gray);
+  fill: var(--color-text-light);
 }
 
 /*==============================
@@ -819,7 +833,7 @@ a {
 .auth__tagline {
   text-align: center;
   margin-bottom: 3rem;
-  color: var(--color-main);
+  color: var(--color-primary);
   font-weight: 500;
   font-size: 1.8rem;
 }
@@ -866,12 +880,12 @@ a {
 
 .profile__info h3 {
   font-size: 2rem;
-  color: var(--color-light);
+  color: var(--color-text);
   font-weight: 400;
 }
 
 .profile__info p {
-  color: var(--color-main);
+  color: var(--color-primary);
   font-weight: 500;
   margin-bottom: 1rem;
 }
@@ -882,7 +896,7 @@ a {
 
 .profile__about h3 {
   text-transform: uppercase;
-  color: var(--color-dark-light);
+  color: var(--color-text-light);
   margin-bottom: 0.5rem;
 }
 
@@ -891,7 +905,7 @@ a {
 }
 
 .profile-page .roomList__header h2 {
-  color: var(--color-dark-light);
+  color: var(--color-text-light);
 }
 
 /*==============================
@@ -900,7 +914,7 @@ a {
 
 .room,
 .participants {
-  background: var(--color-dark);
+  background: var(--color-foreground);
   max-height: 87.5vh;
   border-radius: 0.7rem;
   overflow: hidden;
@@ -919,7 +933,7 @@ a {
 
 .room__top,
 .participants__top {
-  background: var(--color-dark-light);
+  background: var(--color-background);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -931,7 +945,7 @@ a {
 .thread__top svg {
   width: 1.6rem;
   height: 1.6rem;
-  fill: var(--color-light);
+  fill: var(--color-text);
   cursor: pointer;
 }
 
@@ -945,13 +959,13 @@ a {
 .participants__top {
   text-transform: uppercase;
   font-weight: 500;
-  color: var(--color-light);
+  color: var(--color-text);
 }
 
 .room__topLeft svg {
   width: 1.6rem;
   height: 1.6rem;
-  fill: var(--color-light);
+  fill: var(--color-text);
 }
 
 .room__topRight {
@@ -960,7 +974,7 @@ a {
 }
 
 .room__topRight svg {
-  fill: var(--color-main-light);
+  fill: var(--color-primary-light);
 }
 
 .room__header {
@@ -968,7 +982,7 @@ a {
   overflow-y: auto;
   position: absolute;
   width: 95%;
-  background: var(--color-dark);
+  background: var(--color-foreground);
   z-index: 999;
   top: 4.4rem;
   padding-top: 2rem;
@@ -1008,12 +1022,12 @@ a {
 .room__info h3 {
   font-size: 2.4rem;
   font-weight: 500;
-  color: var(--color-main);
+  color: var(--color-primary);
 }
 
 .room__hosted p {
   text-transform: uppercase;
-  color: var(--color-gray);
+  color: var(--color-text-light);
   font-size: 1.2rem;
   font-weight: 700;
   line-height: 2;
@@ -1033,8 +1047,8 @@ a {
 
 .room__topics {
   padding: 0.5rem 1.5rem;
-  background: var(--color-dark-light);
-  color: var(--color-light);
+  background: var(--color-background);
+  color: var(--color-text);
   display: inline-block;
   font-size: 1.4rem;
   border-radius: 1.5rem;
@@ -1050,11 +1064,11 @@ a {
 .threads h3 {
   text-transform: uppercase;
   font-weight: 500;
-  color: var(--color-gray);
+  color: var(--color-text-light);
 }
 
 .threads {
-  background: var(--color-bg);
+  background: var(--color-background);
   border-radius: 0.7rem;
   overflow-y: auto;
   height: 100%;
@@ -1063,7 +1077,7 @@ a {
 }
 
 .thread {
-  border-left: 2px solid var(--color-dark);
+  border-left: 2px solid var(--color-border);
   padding-left: 1rem;
   margin: 2rem 0;
   padding: 2rem;
@@ -1076,7 +1090,7 @@ a {
 }
 
 .thread__top svg {
-  fill: var(--color-dark-light);
+  fill: var(--color-text-light);
 }
 
 .thread__author {
@@ -1109,9 +1123,9 @@ a {
 
 .room__message > form > input {
   resize: none;
-  background-color: var(--color-dark-light);
-  color: var(--color-light);
-  border: none;
+  background-color: var(--color-foreground);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
   outline: none;
   border-radius: 0.7rem;
   height: 4.5rem;
@@ -1121,14 +1135,20 @@ a {
   font-size: 1.4rem;
   font-weight: 500;
   position: relative;
+  transition: all 0.3s ease;
+}
+
+.room__message > form > input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px var(--color-primary-light);
 }
 
 .room__message > form > input::placeholder {
-  color: var(--color-light-gray);
+  color: var(--color-text-light);
 }
 
 .participants__top span {
-  color: var(--color-main);
+  color: var(--color-primary);
   font-size: 1.3rem;
   text-transform: none;
 }
@@ -1153,13 +1173,13 @@ a {
 }
 
 .participant p {
-  color: var(--color-light-gray);
+  color: var(--color-text);
   line-height: 1.2;
 }
 
 .participant span {
   display: block;
   font-weight: 500;
-  color: var(--color-main);
-  font-weight: 1.4rem;
+  color: var(--color-text-light);
+  font-size: 1.4rem;
 }
